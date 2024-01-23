@@ -121,7 +121,7 @@ RCT_EXPORT_METHOD(printImageData:(NSString *)imgUrl
         NSInteger printerWidth = 576;
 
         if(printerWidthType != nil && [printerWidthType isEqualToString:@"58"]) {
-            printerWidth = 384;
+            printerWidth = 400;
         }
 
         if(imageData != nil){
@@ -152,7 +152,7 @@ RCT_EXPORT_METHOD(printImageBase64:(NSString *)base64Qr
             NSInteger printerWidth = 576;
 
             if(printerWidthType != nil && [printerWidthType isEqualToString:@"58"]) {
-                printerWidth = 384;
+                printerWidth = 400;
             }
 
             if(imageData != nil){
@@ -174,7 +174,7 @@ RCT_EXPORT_METHOD(printImageBase64:(NSString *)base64Qr
    NSNumber* nHeight = [options valueForKey:@"imageHeight"];
    NSNumber* nPaddingX = [options valueForKey:@"paddingX"];
 
-   CGFloat newWidth = 150;
+   CGFloat newWidth = image.size.width;
    if(nWidth != nil) {
        newWidth = [nWidth floatValue];
    }
@@ -184,7 +184,7 @@ RCT_EXPORT_METHOD(printImageBase64:(NSString *)base64Qr
        newHeight = [nHeight floatValue];
    }
 
-   CGFloat paddingX = 250;
+   CGFloat paddingX = 0;
    if(nPaddingX != nil) {
        paddingX = [nPaddingX floatValue];
    }
@@ -218,8 +218,8 @@ RCT_EXPORT_METHOD(printImageBase64:(NSString *)base64Qr
     CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
     CGContextFillRect(context, CGRectMake(0, 0, width, height));
-    CGFloat originX = (width - image.size.width)/2;
-    CGFloat originY = (height -  image.size.height)/2;
+    CGFloat originX = 0;
+    CGFloat originY = 0;
     CGImageRef immageRef = image.CGImage;
     CGContextDrawImage(context, CGRectMake(originX, originY, image.size.width, image.size.height), immageRef);
     CGImageRef newImageRef = CGBitmapContextCreateImage(context);
